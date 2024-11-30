@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" class="dark bg-gray-900">
+<head>
+    <meta charset="UTF-8">
+    <title>Repo to PDF Converter</title>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        body { 
+            background-color: #111827;
+            color: #f3f4f6;
+        }
+        input, button {
+            background-color: #1f2937 !important;
+            color: #f3f4f6 !important;
+            border-color: #374151 !important;
+        }
+        input::placeholder {
+            color: #6b7280 !important;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex items-center justify-center">
+    <div class="bg-gray-800 p-8 rounded-lg shadow-2xl w-full max-w-md border border-gray-700">
+        <h1 class="text-2xl font-bold mb-6 text-center text-gray-100">Repo to PDF</h1>
+        
+        <form id="repoForm" class="space-y-4">
+            <div>
+                <label for="repoUrl" class="block text-sm font-medium text-gray-300">GitHub Repository URL</label>
+                <input 
+                    type="text" 
+                    id="repoUrl" 
+                    placeholder="https://github.com/username/repository" 
+                    class="mt-1 block w-full rounded-md border-gray-600 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+                >
+            </div>
+
+            <div>
+                <label for="branch" class="block text-sm font-medium text-gray-300">Branch (optional)</label>
+                <input 
+                    type="text" 
+                    id="branch" 
+                    placeholder="main" 
+                    class="mt-1 block w-full rounded-md border-gray-600 shadow-sm focus:border-blue-500 focus:ring focus:ring-blue-500 focus:ring-opacity-50"
+                >
+            </div>
+
+            <div class="flex items-center">
+                <input 
+                    type="checkbox" 
+                    id="includeEmpty" 
+                    class="mr-2 text-blue-600 bg-gray-700 border-gray-600 focus:ring-blue-500"
+                >
+                <label for="includeEmpty" class="text-sm text-gray-300">Include Empty Directories</label>
+            </div>
+
+            <button 
+                type="submit" 
+                id="convertButton"
+                class="w-full bg-green-600 text-white py-3 px-4 rounded-xl hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 transform hover:scale-105 transition duration-300"
+            >
+                Convert to PDF
+            </button>
+
+            <a 
+                href="https://github.com/pikaimandal/repotopdf" 
+                target="_blank" 
+                class="w-full inline-block text-center bg-yellow-600 text-white py-2 px-4 rounded-xl hover:bg-yellow-700 focus:outline-none focus:ring-2 focus:ring-yellow-500 transform hover:scale-105 transition duration-300"
+            >
+                ⭐ Give this Repository a Star
+            </a>
+        </form>
+
+        <div id="status" class="mt-4 text-center text-sm text-gray-400"></div>
+        <div id="progressContainer" class="mt-4 hidden">
+            <div class="w-full bg-gray-700 rounded-full h-2.5">
+                <div id="progressBar" class="bg-blue-600 h-2.5 rounded-full" style="width: 0%"></div>
+            </div>
+            <div id="progressText" class="text-center text-sm text-gray-400 mt-2"></div>
+        </div>
+    </div>
+    <script src="ghpdfscript.js"></script>
+</body>
+</html>
