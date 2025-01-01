@@ -88,9 +88,6 @@
             >
                 ⭐ Give this Repository a Star
             </a>
-            <div id="lastUpdated" class="mt-4 text-center text-sm text-gray-400">
-            Last updated on: <span id="lastUpdatedDateTime"></span>
-            </div>
         </form>
 
         <div id="status" class="mt-4 text-center text-sm text-gray-400"></div>
@@ -100,7 +97,25 @@
             </div>
             <div id="progressText" class="text-center text-sm text-gray-400 mt-2"></div>
         </div>
+
+        <!-- Add the "Last updated on" label here -->
+        <div id="lastUpdated" class="mt-4 text-center text-sm text-gray-400">
+            Last updated on: <span id="lastUpdatedDateTime"></span>
+        </div>
     </div>
-    <script src="ghpdfscript.js"></script>
+
+    <!-- Add JavaScript to fetch and display the last updated date -->
+    <script>
+        // Fetch the last_updated.txt file and display its content
+        fetch('last_updated.txt')
+            .then(response => response.text())
+            .then(data => {
+                const lastUpdatedDateTime = document.getElementById('lastUpdatedDateTime');
+                if (lastUpdatedDateTime) {
+                    lastUpdatedDateTime.textContent = data.trim();
+                }
+            })
+            .catch(error => console.error('Error fetching last updated date:', error));
+    </script>
 </body>
 </html>
