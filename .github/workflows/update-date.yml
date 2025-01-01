@@ -1,0 +1,36 @@
+name: Update Date and Time
+
+# Trigger the workflow on a schedule
+on:
+  schedule:
+    - cron: '0 */2 * * *' # Runs every 2 hours
+
+# Define the job
+jobs:
+  update:
+    runs-on: ubuntu-latest # Use the latest Ubuntu environment
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      # Step 2: Get the current date and time
+      - name: Get current date and time
+        id: date
+        run: |
+          echo "CURRENT_DATE=$(date '+%d-%m-%Y %I:%M %p')" >> $GITHUB_ENV
+
+      # Step 3: Update the file with the current date and time
+      - name: Update last_updated.txt
+        run: |
+          echo "Last updated on: ${{ env.CURRENT_DATE }}" > last_updated.txt
+
+      # Step 4: Commit and push the changes
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add last_updated.txt
+          git commit -m "Auto-update: ${{ env.CURRENT_DATE }}"
+          git push
