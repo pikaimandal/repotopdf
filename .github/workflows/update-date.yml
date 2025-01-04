@@ -2,7 +2,7 @@ name: Update Date and Time
 
 on:
   schedule:
-    - cron: '0 */2 * * *' # Runs every 2 hours
+    - cron: '*/5 * * * *' # Runs every 5 minutes
 
 jobs:
   update:
